@@ -1,5 +1,7 @@
 # project euler problem 19
 # http://projecteuler.net/problem=19
+# We can solve this problem by using standard library calendar
+# piece of cake :)
 
 import calendar
 
