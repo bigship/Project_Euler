@@ -2,22 +2,39 @@
 # http://projecteuler.net/problem=17
 
 d = {
-    1:len('one'), 2:len('two'), 3:len('three'), 4:len('four'),
-    5:len('five'), 6:len('six'), 7:len('seven'), 8:len('eight'),
-    9:len('nine'), 10:len('ten'), 11:len('eleven'), 12:len('twelve'),
-    13:len('thirteen'), 14:len('fourteen'), 15:len('fifteen'), 16:len('sixteen'),
-    17:len('seventeen'), 18:len('eighteen'), 19:len('nineteen'), 20:len('twenty') ,
-    30:len('thirty'), 40:len('forty'), 50:len('fifty'), 60:len('sixty'),
-    70:len('seventy'), 80:len('eighty'), 90:len('ninty'), 100:len('hundred')
+    1:'one', 2:'two', 3:'three', 4:'four',
+    5:'five', 6:'six', 7:'seven', 8:'eight',
+    9:'nine', 10:'ten', 11:'eleven', 12:'twelve',
+    13:'thirteen', 14:'fourteen', 15:'fifteen', 16:'sixteen',
+    17:'seventeen', 18:'eighteen', 19:'nineteen', 20:'twenty',
+    30:'thirty', 40:'forty', 50:'fifty', 60:'sixty',
+    70:'seventy', 80:'eighty', 90:'ninety', 100:'hundred',
+    0:''
 }
 
-def letters_length(n):
+def letters_for_number(n):
     global d
 
-    if 1 <= n <= 20:
-        return d[n]
+    if n < 100:
+        if n in d:
+            return d[n]
+        else:
+            return d[n/10*10] + d[n%10]
 
-    if  21 <= n <= 99:
-        return d[(n/10)*10] + d[n - (n/10)*10]
+    hundred = n / 100
+    tens = n % 100 / 10
+    units = n % 10
 
-print letters_length(34)  
+    if tens == 0 and units == 0: 
+        return d[hundred] + d[100]
+
+    p = tens * 10 + units
+    if p in d:
+        return d[hundred] + d[100] + 'and' + d[p]
+    else:
+        return d[hundred] + d[100] + 'and' + d[tens*10] + d[units]  
+
+print sum(map(len, map(letters_for_number, xrange(1, 1000)))) + len('onethousand')
+
+
+
