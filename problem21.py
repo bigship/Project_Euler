@@ -12,8 +12,12 @@ def divisors_sum(n):
     s.remove(n)
     return sum(s)
 
+'''
 d = {}
 for i in xrange(1, 10001):
     d[i] = divisors_sum(i)
+'''
 
+# dictionary comprehension 
+d = {k:divisors_sum(k) for k in xrange(1, 10001)}
 print sum(x for x in xrange(1, 10001) if d.get(d[x]) == x and d[x] != x)
