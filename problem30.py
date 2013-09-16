@@ -12,6 +12,9 @@ for x in xrange(2, 1000000):
         total_sum += x
 print total_sum
 
+# We could also write it in one line :)
+print reduce(lambda x, y: x+y, (x for x in xrange(2, 1000000) if x == sum(map(lambda x:x**5, map(int, str(x))))))
+
 # The equivalent C code only need 0.257s...
 # Huge performance difference
 '''
