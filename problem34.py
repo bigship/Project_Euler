@@ -9,6 +9,9 @@ Find the sum of all numbers which are equal to the sum of the factorial of their
 Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 '''
 
+# Since 9! * 8 = 2903040, it is a 7-digit number
+# so the max upper-bond is 9! * 7 = 2540160 
+
 d = {0:1, 1:1, 2:2, 3:6, 4:24, 5:120, 6:720, 7:5040, 8:40320, 9:362880}
 
 def digits_fact_sum(n):
@@ -20,7 +23,6 @@ def digits_fact_sum(n):
 
 total_sum = 0
 for x in xrange(10, 2540160):
-    s = digits_fact_sum(x)
-    if s == x:
+    if x == digits_fact_sum(x):
         total_sum += x
 print total_sum
