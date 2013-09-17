@@ -25,7 +25,6 @@ def is_prime(n):
 
 def rotate_number(n):
     s = str(n)
-    yield n
     for i in xrange(0, len(s) - 1):
         t = s[1:] + s[0]
         yield int(t)
