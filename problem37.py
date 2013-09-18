@@ -27,17 +27,18 @@ first_digit_sieve = [1, 4, 6, 8, 9]
 
 cnt = 0
 total_sum = 0
-while cnt != TOTAL_COUNT:
-    for n in xrange(23, 1000000):
-        s = str(n)
-        first_digit = int(s[0])
-        last_digit = int(s[-1])
-        if first_digit in first_digit_sieve or \
-        last_digit in last_digit_sieve:
-            continue
+for n in xrange(23, 1000000):
+    s = str(n)
+    first_digit = int(s[0])
+    last_digit = int(s[-1])
+    if first_digit in first_digit_sieve or \
+    last_digit in last_digit_sieve:
+        continue
 
-        if all(is_prime(x) for x in truncat_num(n)):
-            total_sum += n
-            cnt += 1
+    if all(is_prime(x) for x in truncat_num(n)):
+        total_sum += n
+        cnt += 1
+        if cnt == TOTAL_COUNT:
+            break
 
 print total_sum
