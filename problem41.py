@@ -7,6 +7,8 @@
 # The problem asks for the largest n-digit pandigital prime number,
 # we can make use of the permutations, in this way we don't even need
 # to compute any prime numbers in advance.
+# Tricky part: we really should let itertools.permutations provide all the permutations in 
+# descending order, if we found one prime then it is the answer :) Blazing fast ! :)
 
 from itertools import permutations
 
@@ -23,7 +25,6 @@ test_set = [7654321, 654321, 54321, 4321, 321, 21]
 def solve():
     for x in test_set:
         s = str(x)
-        length = len(s)
         for y in permutations(s):
             z = int(''.join(y))
             if is_prime(z):
