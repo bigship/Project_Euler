@@ -14,12 +14,10 @@ for numbers in itertools.permutations('1234567890'):
     s = ''.join(numbers)
     if s[0] != '0':
         num = int(s)
-        flag = True
         for index, sub in enumerate(generate_subnumber(num)):
             if sub % prime_divisor[index] != 0:
-                flag = False
                 break
-        if flag:
+        else:
             total_sum += num 
 
 print total_sum
