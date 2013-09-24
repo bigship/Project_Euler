@@ -125,11 +125,8 @@ def compare_all_cards(s1, s2):
         if i in s2:
             s1.remove(i)
             s2.remove(i)
-    print s1, s2
-    print max(s1), max(s2)
     return max(s1) > max(s2)
 
-             
 if __name__ == '__main__':
     wins = 0
     for first_player, second_player in get_playerhands():
