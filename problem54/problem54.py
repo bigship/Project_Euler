@@ -1,7 +1,7 @@
 # project euler problem 54
 # http://projecteuler.net/problem=54
 
-# Texas Holden
+# Texas Holden winning hand
 
 card_value = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, 
 '8':8, '9':9, 'T':10, 'J':11, 'Q':12, 'K':13, 'A':14 }
@@ -53,10 +53,10 @@ def is_flush(hand):
     return hand[1] == hand[3] == hand[5] == hand[7] == hand[9]
 
 def is_straight(hand):
-    return card_value[hand[0]] + 1 == card_value[hand[2]] and \
-    card_value[hand[2]] + 1 == card_value[hand[4]] and \
-    card_value[hand[4]] + 1 == card_value[hand[6]] and \
-    card_value[hand[6]] + 1 == card_value[hand[8]]
+    t = sorted([card_value[hand[i]] for i in xrange(0, 10) if i % 2 == 0])
+    return t[0] + 1 == t[1] and t[1] + 1 == t[2] and \
+    t[2] + 1 == t[3] and t[3] + 1 == t[4]
+
 
 def is_straight_flush(hand):
     return is_flush(hand) and is_straight(hand)
@@ -135,6 +135,7 @@ if __name__ == '__main__':
         rank2 = hand_ranking(second_player.replace(' ', ''))
         if rank1 > rank2:
             wins += 1
+            
         elif rank1 == rank2:
             cards1 = [first_player.replace(' ', '')[i] for i in xrange(0, 10) if i % 2 == 0]
             cards2 = [second_player.replace(' ', '')[i] for i in xrange(0, 10) if i % 2 == 0]           
@@ -142,30 +143,37 @@ if __name__ == '__main__':
             if rank1 == ranking['straight flush'] or rank1 == ranking['straight']:
                 if max(cards1) > max(cards2):
                     wins += 1
+                    
             elif rank1 == ranking['four kind']:
                 f1 = get_four_kind_card(cards1)
                 f2 = get_four_kind_card(cards2)
                 if f1 > f2:
                     wins += 1
+                    
             elif rank1 == ranking['full house']:
                 t1 = get_full_house_card(cards1)
                 t2 = get_full_house_card(cards2)
                 if t1 > t2:
                     wins += 1
+                    
             elif rank1 == ranking['three kind']:
                 q1 = get_three_kind_card(cards1)
                 q2 = get_three_kind_card(cards2)
                 if q1 > q2:
                     wins += 1
+                    
             elif rank1 == ranking['two pairs']:
                 a1, b1, c1 = get_two_pair_card(cards1)
                 a2, b2, c2 = get_two_pair_card(cards2)
                 if max(a1, b1) > max(a2, b2):
                     wins += 1
+                elif max(a1, b1) == max(a2, b2):
+                    if min(a1, b1) > min(a2, b2):
+                        wins += 1
                 elif a1 == a2 and b1 == b2:
                     if c1 > c2:
                         wins += 1
-            
+                        
             elif rank1 == ranking['one pair']:
                 p1, p2, p3, p4 = get_one_pair_card(cards1)
                 p5, p6, p7, p8 = get_one_pair_card(cards2)
@@ -173,18 +181,16 @@ if __name__ == '__main__':
                     wins += 1
                 elif p1 == p5 and max(p2, p3, p4) > max(p6, p7, p8):
                     wins += 1
-            
+                    
             elif rank1 == ranking['flush']:
                 x = get_all_cards(cards1)
                 y = get_all_cards(cards2)
                 if compare_all_cards(x, y):
                     wins += 1
-            
+                    
             elif rank1 == ranking['high card']:
                 x = get_all_cards(cards1)
                 y = get_all_cards(cards2)
                 if compare_all_cards(x, y):
                     wins += 1
-
     print wins
-
