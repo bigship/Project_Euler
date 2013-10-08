@@ -1,5 +1,6 @@
 # project euler problem 64
 # http://projecteuler.net/problem=64
+# check http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
 
 upperbound = 10000
 cnt = 0
